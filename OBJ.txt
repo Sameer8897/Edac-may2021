@@ -1,0 +1,1358 @@
+package lab;
+
+public class Animal {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Mammals obj1=new Mammals();
+		obj1.mammals();
+
+		MarineAnimals obj2=new MarineAnimals();
+		obj2.marineAnimals();
+
+		BlueWhale obj3=new BlueWhale();
+		obj3.BlueWhale();
+
+		obj3.mammals();
+		obj3.marineAnimals();
+	}
+
+}
+
+class Mammals
+{	
+	void mammals(){
+	System.out.println("I am mammal");
+	}	
+}
+class MarineAnimals extends Mammals
+{
+	void marineAnimals(){
+	System.out.println("I am a marine animal");	
+	}
+}
+
+class BlueWhale extends MarineAnimals
+{
+	void BlueWhale(){
+	System.out.println("Ibelong to both the categories: Mammals as well as Marine Animals");	
+	}
+} 
+ 18  ArrayAvg.java 
+@@ -0,0 +1,18 @@
+import java.util.Scanner;
+class ArrayAvg
+{
+public static void main(String args[])
+{
+	int float=0;
+	Scanner sc=new Scanner(System.in);
+	float arr[];
+	arr=new float[5];
+	for(int i=0;i<=4;i++)
+	{
+	arr[i]=sc.nextFloat();
+	add=add+arr[i];
+	}
+	float avg=(float)(add/5);
+	System.out.println("average="+avg);
+}
+} 
+ 23  ArrayIntegerRepeat.java 
+@@ -0,0 +1,23 @@
+package lab;
+
+public class ArrayIntegerRepeat {
+	public static void main(String args[])
+	{
+		int count=0;
+		int arr[]= {0,1,2,3,4,5,5,5,5};
+		for(int i=0;i<arr.length;i++)
+		{
+			for(int j=i+1;j<arr.length;j++)
+			{
+				if(arr[i]==arr[j])
+				{
+					count++;
+				}
+			}
+		}
+		if(count>=1)
+			System.out.println(count+" repetation");
+		else
+			System.out.println(count+ "repetation");
+	}
+}
+ 77  CalculateIntrest.java 
+@@ -0,0 +1,77 @@
+package lab;
+
+import java.util.InputMismatchException;
+
+public class CalculateIntrest {
+
+	public static void main(String[] args) throws Coustomize {
+		// TODO Auto-generated method stub
+		SBI a=new SBI();
+			a.balance=MyConsole.getInteger("Enter the minimum balance amount which is 3000");
+			if(a.balance<3000) {
+				try {
+					throw new Coustomize("you need to Deposit minimum balance to axcess your account");
+				}catch(Coustomize e) {
+					System.err.println(e.getMessage());
+				}finally {
+					System.out.println("Thank You for visiting bank !");
+				}
+			}
+			else {
+				switch(MyConsole.getInteger("press 1 if you want to credit or press 2 if you want to debit")){
+			case 1:
+				a.credit(MyConsole.getInteger("Enter the amount you want to credit"));
+				System.out.println("After Crediting your balance your balance is "+a.balance);
+				a.calculateIntrest(6.5, MyConsole.getDouble("Enter for how much year you want to calculate intrest"));
+				System.out.println("After calculating the intrest you will get "+a.balance+" after "+a.period+" years");
+				break;
+			case 2:
+			a.debit(MyConsole.getInteger("Enter the amount you want to debit"));
+			if(a.balance<0) {
+				try {
+					throw new Coustomize("Insufficient Balance");
+				}catch(Coustomize e) {
+					System.err.println(e.getMessage());
+				}finally {
+					System.out.println("Thank You for visiting bank !");
+				}
+
+			}
+			else {
+				System.out.println("After Debiting your balance your balance is "+a.balance);
+				a.calculateIntrest(6.5, MyConsole.getDouble("Enter for how much year you want to calculate intrest"));
+				System.out.println("After calculating the intrest you will get "+a.balance+" after "+a.period+" years");
+				}
+			/*default:
+				System.out.println("Wrong input sorry we cannot process");
+				break;*/
+		}
+			}
+
+	}
+}
+
+abstract class Bank{
+	double balance;
+	void credit(double amount) {balance+=amount;}
+	void debit(double amount) {
+		balance-=amount;
+	}
+	abstract void calculateIntrest(double rate,double period);
+}
+
+class SBI extends Bank{
+	double period;
+	void calculateIntrest(double rate,double period) {
+		double a=this.balance;
+		this.period=period;
+		double intrest=(rate*this.period*a)/100;
+		balance+=intrest;
+	}
+}
+
+class Coustomize extends Exception{
+	public Coustomize(String a) {
+		super(a);
+	}
+}
+ 71  ClassAndObjectAssignment1.java 
+@@ -0,0 +1,71 @@
+package lab;
+
+public class ClassAndObjectAssignment1 {
+
+	public static void main(String[] args) {
+	/*	Student4 obj=new Student4();
+		obj.name="john";
+		obj.roll_no=2;
+		Student4 obj1=new Student4();
+		obj1.address="wjkncjiwbljnjkv jnfjwn";
+		obj1.name="sam";
+		obj1.phoneNo="+91 "+9967498282l;
+		System.out.println(obj1.address);
+		System.out.println(obj1.name);
+		System.out.println(obj1.phoneNo);
+		Student4 obj2=new Student4();
+		obj2.address="wjkncjiwbljnjkv jnfjwn";
+		obj2.name="john";
+		obj2.phoneNo="+91 "+8850423908l;
+		System.out.println(obj2.address);
+		System.out.println(obj2.name);
+		System.out.println(obj2.phoneNo);*/
+	//	Triangle obj3=new Triangle();
+		Rectangle rec=new Rectangle(4,5);
+		System.out.println(rec.area());
+		Rectangle rec1=new Rectangle(5,8); 
+		System.out.println(rec1.area());
+	}
+
+}
+
+class Student4{
+	int roll_no;
+	String name;
+	String address;
+	String phoneNo;
+}
+
+class Triangle{
+	int s1=3;
+	int s2=4;
+	int s3=5;
+	Triangle(){
+		int semiperimetre=(s1+s2+s3)/2;
+		int area=(int)Math.sqrt(semiperimetre*(semiperimetre-s1)*(semiperimetre-s2)*(semiperimetre-s3));
+		System.out.println("area of triange="+area);
+		System.out.println("perimeter of triange="+(s1+s2+s3));
+	}
+}
+
+class Rectangle{
+	int a;
+	int b;
+	Rectangle(int side1,int side2){
+		a=side1;
+		b=side2;
+	}
+	int area() {
+		return this.a*this.b;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+ 39  Constructor.java 
+@@ -0,0 +1,39 @@
+package lab;
+
+public class Constructor {
+	public static void main(String args[])
+	{
+		sai cl = new sai();
+	}
+}
+
+
+class Baseclass{
+	//Default
+	public Baseclass() {
+		System.out.println("base class is created");
+	}
+	//Parameterized
+	public Baseclass(String arg) {
+		this();//One constructor calling the other....
+		System.out.println("base class is created with String arg " + arg);
+	}
+	public Baseclass(int arg) {
+		System.out.println("base class is created with int arg " + arg);
+	}
+}
+
+class Derivedclass extends Baseclass{
+	//Will call the default constructor implicitly. If there is no default constructor, then it is the responsibility of the derived class to call the specific base class constructor... 
+	  Derivedclass() {
+		  super("sairaj jadhav");
+		System.out.println("calling derived class constructer");
+	}
+}
+class sai extends Derivedclass{
+	sai(){
+		System.out.println("my name is sai");}
+}
+
+
+
+ 39  Duplicate.java 
+@@ -0,0 +1,39 @@
+package lab;
+
+public class Duplicate {
+	public static void main(String args[])
+	{
+		int arr[]= {1, 2, 3, 3, 4 , 6, 6};
+		int temp;
+		for(int i=0;i<=arr.length;i++)
+		{
+			for(int j=i+1;j<arr.length;j++)
+			{
+				if(arr[i]>arr[j])
+				{
+					temp=arr[i];
+					arr[i]=arr[j];
+					arr[j]=temp;
+				}
+			}
+		}
+		/*for(int i=0;i<arr.length;i++)
+		{
+			System.out.println(arr[i]);
+		}*/
+		int count=0;
+		for(int i=0;i<arr.length;i++)
+		{
+			if(arr[i]!=arr[i+1])
+			{
+				count++;
+				for(int j=0;j<count;j++)
+				{
+					System.out.println(arr[j]);
+				}
+			}
+		}
+
+	}
+}
+
+ 24  DuplicateArray.java 
+@@ -0,0 +1,24 @@
+import java.util.Scanner;
+class DupicateArray
+{
+public static void main(String args[])
+{
+	Scanner sc=new Scanner(System.in);
+	int arr[]=new int[5];
+	for(int i=0;i<=arr.length-1;i++)
+	{
+	arr[i]=sc.nextInt();
+	}
+	for(int i=0;i<=4;i++)
+	{
+		int large=arr[i];
+		for(int j=i+1;j<=4;j++)
+		{
+			if(large==arr[j])
+			System.out.println(large+"Duplicate number");
+		}
+	}
+
+
+}
+} 
+ 39  EqualsMethodExample.java 
+@@ -0,0 +1,39 @@
+package lab;
+
+public class EqualsMethodExample {
+
+	public static void main(String[] args) {
+		Student3 obj1=new Student3(101,"sairaj");
+		Student3 obj2=new Student3(102,"viraj");
+		Student3 obj3=new Student3(101,"sairaj");
+		Student3 obj4=obj1;
+		System.out.println(obj1.equals(obj2));
+		System.out.println(obj1.equals(obj3));
+		System.out.println(obj1.equals(obj4));
+	}
+
+}
+
+
+class Student3{
+	int rollNo;
+	String name;
+	Student3(int rollNo,String name){
+		this.name=name;
+		this.rollNo=rollNo;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		int rollNo=this.rollNo;
+		String name=this.name;
+		Student3 s=(Student3)obj;
+		if(s.name.equals(name)&& s.rollNo==rollNo)
+			return true;
+		else
+			return false;
+
+	}
+}
+
+
+
+ 33  ExceptionHandling.java 
+@@ -0,0 +1,33 @@
+
+package lab;
+import java.io.IOException;
+import java.util.*;
+public class ExceptionHandling {
+
+	public static void main(String args[])throws Coustomized
+	{
+		int age=MyConsole.getInteger("enter the age");
+		Age a=new Age();
+		try{
+			a.m1(12);
+		}catch(Coustomized e) {
+			System.out.println("you are kid you cannot vote");
+		}
+}
+}
+
+class Age{
+	void m1(int age) throws Coustomized {
+		if(age<18)
+			throw new Coustomized();
+		else
+			System.out.println("you can vote");
+	}
+}
+
+class Coustomized extends Throwable
+{
+	Coustomized(){
+		super();
+	}
+} 
+ 48  FindEmployee.java 
+@@ -0,0 +1,48 @@
+package lab;
+
+public class FindEmployee {
+	public static void main(String args[])
+	{
+		DB db=new DB();
+		db.setValues();
+		System.out.println(db.readId(MyConsole.getInteger("Enter employee id to find name of the employee associate with that id")));
+	}
+}
+
+class Employee{
+	int id;
+	String name;
+	void set(String name,int id) {
+		this.name=name;
+		this.id=id;
+	}
+}
+class DB{
+	Employee[] emp=new Employee[MyConsole.getInteger("enter how many employee you want to store")];
+	void setValues() {
+		for(int i=0;i<emp.length;i++)
+		{
+			emp[i]=new Employee();
+			int a=MyConsole.getInteger("enter id");
+			MyConsole.getString("");
+			String b=MyConsole.getString("enter the name of employee");
+			emp[i].set(b,a);
+		}
+	}
+
+	String readId(int id) {
+		for(Employee x:emp) {
+			if(id==x.id)
+				return x.name;
+		}
+		return null;
+	}
+	int readName(String name) {
+		for(Employee y:emp) {
+			if(name==y.name)
+				return y.id;
+			}
+		return -1;
+	}
+
+}
+ 20  First2Element.java 
+@@ -0,0 +1,20 @@
+import java.util.Scanner;
+class First2Element
+{
+public static void main(String args[])
+{
+	Scanner sc=new Scanner(System.in);
+	int arr[]=new int[5];
+	for(int i=0;i<=arr.length-1;i++)
+	{
+	arr[i]=sc.nextInt();
+	}
+	System.out.print("first 2 elements are:");
+	for(int i=0;i<=1;i++)
+	{
+		System.out.print(" "+arr[i]);
+	}
+
+
+}
+} 
+ 36  Fruits.java 
+@@ -0,0 +1,36 @@
+package lab;
+
+public class Fruits {
+
+	public static void main(String[] args) {
+
+		Basket cal=new Basket();
+		cal.noOfApples(10);
+		cal.noOfMangos(20);
+		cal.calculate();
+	}
+
+}
+
+class Apples {
+	int apple;
+	void noOfApples(int a) {
+		apple=a;
+		System.out.println("no of apples :"+apple);
+	}
+
+}
+
+class Mangos extends Apples{
+	int mango;
+	void noOfMangos(int a) {
+		mango=a;
+		System.out.println("no of apples :"+mango);
+
+	}
+}
+class Basket extends Mangos{
+	void calculate() {
+		System.out.println("Fruits in basket :"+(mango+apple));
+	}
+} 
+ 25  FunctionalInter.java 
+@@ -0,0 +1,25 @@
+package lab;
+
+public class FunctionalInter {
+	public static void main(String args[])
+	{
+		ITest sai=() -> System.out.println("hello world");
+		sai.testFunc();
+		MathInterface cal=(double v1, double v2) -> {
+			System.out.println("returning");
+			return v1+v2;
+		};
+		System.out.println(cal.mathFunc(23, 34));
+
+	}
+}
+
+
+interface ITest{
+	void testFunc();
+}
+@FunctionalInterface
+interface MathInterface{
+	double mathFunc(double v1, double v2);
+
+}
+ 34  HashCodeExample.java 
+@@ -0,0 +1,34 @@
+package lab;
+
+public class HashCodeExample {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Student2 obj1=new Student2(111,"sairaj");
+		Student2 obj2=new Student2(222,"viraj");
+		System.out.println(obj1.toString());//internally obj1.toString method is called which contains hashCode() method
+		System.out.println(obj2);
+
+	}
+
+}
+
+
+
+class Student2{
+	int rollNo;
+	String name;
+	Student2(int rollNo,String name){
+		this.name=name;
+		this.rollNo=rollNo;
+	}
+	@Override
+	public int hashCode() {
+		return this.rollNo;
+	}
+	@Override
+	public String toString() {
+
+		return ""+rollNo;
+	}
+} 
+ 21  MaxArray.java 
+@@ -0,0 +1,21 @@
+import java.util.Scanner;
+class MaxArray
+{
+public static void main(String args[])
+{
+	Scanner sc=new Scanner(System.in);
+	int arr[]=new int[5];
+	for(int i=0;i<=arr.length-1;i++)
+	{
+	arr[i]=sc.nextInt();
+	}
+	int large=arr[0];
+	for(int i=1;i<=4;i++)
+	{
+		if(arr[i]>large)
+		large=arr[i];
+	}
+	System.out.println("minimum="+large);
+
+}
+} 
+ 35  Min2Array.java 
+@@ -0,0 +1,35 @@
+import java.util.Scanner;
+class Min2Array
+{
+public static void main(String args[])
+{
+	Scanner sc=new Scanner(System.in);
+	int arr[]=new int[5];
+	for(int i=0;i<5;i++)
+	{
+	arr[i]=sc.nextInt();
+	}
+	for(int i=0;i<5;i++)
+	{
+		int temp;
+		int small=arr[i];
+		for(int j=i+1;j<5;j++)
+		{
+		if(small<arr[j])
+		{
+		small=arr[j];
+		}
+		temp=arr[i];
+		arr[i]=arr[j];
+		arr[j]=temp;
+		}
+
+
+	}
+	for(int a:arr)
+	{
+		System.out.print(a+" ");
+	}
+
+}
+} 
+ 21  MinArray.java 
+@@ -0,0 +1,21 @@
+import java.util.Scanner;
+class MinArray
+{
+public static void main(String args[])
+{
+	Scanner sc=new Scanner(System.in);
+	int arr[]=new int[5];
+	for(int i=0;i<=arr.length-1;i++)   //5 4 3 2 1
+	{
+	arr[i]=sc.nextInt();
+	}
+	int small=arr[0];
+	for(int i=1;i<=4;i++)
+	{
+		if(arr[i]<small)
+		small=arr[i];
+	}
+	System.out.println("minimum="+small);
+
+}
+} 
+ 32  MissingElementInArray.java 
+@@ -0,0 +1,32 @@
+package lab;
+
+public class MissingElementInArray {
+	public static void main(String args[])
+	{
+		int arr1[]= {1,3,4,5};
+		int temp;
+		for(int i=0;i<arr1.length+1;i++)
+		{	
+			for(int j=i+1;j<arr1.length;j++)
+			{
+				if(arr1[i]>arr1[j]) {
+				temp=arr1[i];
+				arr1[i]=arr1[j];
+				arr1[j]=temp;
+				}
+			}
+		}
+		int count=0;
+		for(int i=0;i<arr1.length;i++)
+		{
+			count++;
+			if(count!=arr1[i])
+			{
+				System.out.println(count+" is missing");
+				break;
+			}
+
+		}
+	}
+}
+
+ 54  MyArray.java 
+@@ -0,0 +1,54 @@
+package lab;
+
+public class MyArray {
+
+	public static void main(String[] args) {
+		MyStack sai=new MyStack(5);
+		sai.push(5);
+		sai.push(2);
+		sai.push(7);
+		sai.push(3);
+		sai.push(9);
+		for(int x:sai.arr) {
+			System.out.println(x);
+		}
+		sai.pop();
+		sai.pop();
+		sai.pop();
+		sai.pop();
+	}
+
+}
+
+
+class MyStack{
+
+	int arr[];
+	int top=-1;
+	int cap;
+	MyStack(int size){
+		arr=new int[size];
+		cap=size;
+	}
+
+	boolean isFull() {
+		return top==cap-1;
+	}
+	boolean isEmpty() {
+		return top==-1;
+	}
+	void push(int data) {
+		if(isFull()) {
+			System.out.println("Stack full zaala");
+		}
+		arr[++top]=data;
+	}
+	void pop() {
+		if(isEmpty()) {
+			System.out.println("Stack is empty");
+		}
+		System.out.println("poped element "+arr[top]);
+		top--;
+	}
+}
+
+ 19  MyConsole.java 
+@@ -0,0 +1,19 @@
+package lab;
+
+import java.util.Scanner;
+
+public class MyConsole {
+	public static Scanner sc=new Scanner(System.in);
+	public static int getInteger(String question) {
+		System.out.println(question);
+		return sc.nextInt();
+	}
+	public static double getDouble(String question) {
+			System.out.println(question);
+			return sc.nextDouble();
+	}
+	public static String getString(String question) {
+		System.out.println(question);
+		return sc.nextLine();
+	}
+}
+ 17  Recursion.java 
+@@ -0,0 +1,17 @@
+package lab;
+
+public class Recursion {
+	public static void main(String[] args) {
+
+	}
+}
+
+class Sairaj12{
+	static void m1() {}
+}
+class Viraj{
+
+	void m2() {
+		Sairaj12.m1();
+	}
+} 
+ 50  SortNumber.java 
+@@ -0,0 +1,50 @@
+package lab;
+
+import java.util.Arrays;
+
+public class SortNumber {
+	public static void main(String[] args) {
+		int[] arr = new int[MyConsole.getInteger("enter the length of array")];
+		int arr3[]=new int[arr.length];
+		int arr2[]=new int[arr.length];
+		for (int i = 0; i < arr.length; i++) {
+			arr[i] = MyConsole.getInteger("enter element");
+			arr3[i]=arr[i];
+		}
+		int rem;
+
+		for (int i = 0; i < arr.length; i++) {
+			int num = 0;
+			while (arr[i] != 0) {
+				rem = arr[i] % 10;
+				arr[i] /= 10;
+				num += rem;
+
+			}
+			arr2[i]=num;
+
+		}
+		int a;
+		int temp;
+		for(int i=0;i<arr.length;i++) {
+			for(int j=i+1;j<arr.length;j++) {
+				if(arr2[i]>arr2[j]) {
+				a=arr2[i];
+				arr2[i]=arr2[j];
+				arr2[j]=a;
+
+				temp=arr3[i];
+				arr3[i]=arr3[j];
+				arr3[j]=temp;
+				}	
+			}
+		}
+		//Arrays.sort(arr2);
+		for(int sai:arr2) {
+			System.out.println(sai);
+		}
+		for(int sai:arr3) {
+			System.out.println(sai);
+		}
+	}
+}
+ 33  StackExample.java 
+@@ -0,0 +1,33 @@
+package lab;
+
+import java.util.Stack;
+
+public class StackExample {
+	public static void main(String[] args) {
+		Stack<Integer> myStack = new Stack<Integer>();
+		for (int i = 0; i < 10; i++) {
+			myStack.push(i + 1);
+		}
+
+		//myStack.forEach((i)->System.out.println(i));
+		///////////POPING ELEMENTS////////
+		//pop method removes the lastly added element from the stack and returns it. 
+
+		/*myStack.forEach((sai)-> {
+			System.out.println(sai);
+		});*/
+
+		//peek will give the last element added to the stack but will not remove it. 
+	//	System.out.println(myStack.peek());
+		//FOR READING THE ELEMENTS:
+		//System.out.println(myStack);
+
+		for (int i = 0; i < myStack.size(); i++) {
+			System.out.println(myStack.get(i));
+		}
+		for (int i = 0; i < myStack.capacity(); i++) {
+
+			System.out.println(myStack.pop());
+		}
+	}
+} 
+ 25  StringExample.java 
+@@ -0,0 +1,25 @@
+package lab;
+
+public class StringExample {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String s="sairaj";//here one object created in constant pool which is in method area.
+		String s1=new String("jadhav"); //here 2 objects are created one in heap area and in constant pool area if that object is present in constant pool area which is in method area then on object is created 
+		//in method area the memory will get free when jvm is shut down but in heap area if there is no reference pointing to an object then that object is destroyed by garbage collection.
+		System.out.println(s);
+		System.out.println(s1.toString());
+		System.out.println(s1.charAt(2));
+		String a=s.concat("jadhav");
+		System.out.println(a);
+
+
+
+
+		StringBuffer s2=new StringBuffer("viraj");
+		s2.append("sairaj");
+		System.out.println(s2);
+		int d[]=new int[3];
+		System.out.println(d.length);
+	}
+}
+ 37  Students.java 
+@@ -0,0 +1,37 @@
+package lab;
+
+import java.util.Scanner;
+
+public class Students {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Calculate cal=new Calculate();
+		Scanner sc=new Scanner(System.in);
+		System.out.println("enter the no of students");
+		int students=sc.nextInt();
+		for(int i=1;i<=students;i++)
+		{
+			cal.calculate(sc.nextInt(), sc.nextInt(), sc.nextInt(),i);
+		}
+		System.out.println("Average marks of class="+(cal.total/students));		
+	}
+}
+
+class Marks{
+	int rollNo;
+	int marks;
+	String name;
+}
+
+
+class Calculate extends Marks{
+	int total=0;
+	int sum=0;
+	void calculate(int physic ,int mathematics, int chemistry,int i)
+	{
+		int sum=physic+mathematics+chemistry;
+		total+=physic+mathematics+chemistry;
+		System.out.println("total marks of student"+i+"="+sum);
+	}
+} 
+ 17  Test1.java 
+@@ -0,0 +1,17 @@
+package lab;
+
+import java.io.IOException;
+
+/*Create a class with a main( ) that throws an object of class Exception inside a try block. Give the constructor for Exception a String argument. Catch the exception inside a catch clause and print the String argument. Add a finally clause and print a message to prove you were there.*/
+public class Test1 {
+
+	public static void main(String[] args)  {
+
+
+	}
+}
+
+
+
+
+
+ 33  Test2.java 
+@@ -0,0 +1,33 @@
+package lab;
+/*Define a new exception, called ExceptionLineTooLong, that prints out the error message
+"The strings is too long". Write a program that reads all lines of a file and throws an exception of type
+ExceptionLineTooLong in the case where a string of the file is longer than 80 characters. Handle also all
+exceptions that could be thrown by the program.*/
+public class Test2 {
+	public static void main(String args[]) {
+		Get age=new Get();	
+		try {
+			age.vote(MyConsole.getInteger("enter your age"));
+		}catch(ExceptionLineTooLong e) {
+			System.out.println(e.getMessage());
+		}
+	}
+}
+
+class ExceptionLineTooLong extends Exception{
+	     ExceptionLineTooLong(String msg){
+		super(msg);
+	}
+}
+
+class Get{
+	void vote(int age) throws  ExceptionLineTooLong {
+	if(age<18) {
+		throw new ExceptionLineTooLong("you are below age you cannot vote");
+	}
+	else {
+		System.out.println("you can vote");
+	}
+}	
+}
+
+ 53  Test3.java 
+@@ -0,0 +1,53 @@
+package lab;
+/**
+ * Synchronization is a capability to control the access of resources by multiple threads at a time. If U have a shared resource(File, Variable, Memory) and multiple threads are accessing this resource, U would want to allow only one thread to access the shared resource, then we think of Thread Synchronization. It is mainly required to prevent thread interference and consistency problem.  
+ * To maintain locking mechanism to the resource, U could use synchronized block to ensure that once a thread enters that block, the other threads will wait till the Entered thread exits the block. In traditional programming it is called as CRITICAL SECTION or MUTEX. Mutex is the class that is used in Java to achieve this feature. 
+ * */
+
+public class Test3 extends Thread{
+	 public void run()  {
+		for(int i=0;i<10;i++) {
+			try {
+				Thread.sleep(1000);
+				System.out.println("Beep# dxfdxjhgcg "+i);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+
+		}
+	}
+	static void usingLamda() {
+		 Runnable sai=()->{
+			 for(int i=0;i<10;i++) {
+					try {
+						Thread.sleep(1000);
+						System.out.println("Beep# axb hjagvghcdgfacgavgcvgaycvgvahjcb hjavcghavcg "+i);
+					}catch(Exception e) {
+						e.printStackTrace();
+					}
+		 }
+	 };
+	 Thread obj1=new Thread(sai);
+	 obj1.start();
+}
+	public static void main(String[] args) throws Exception{
+		MultiThreading sai=new MultiThreading();
+		Test3 obj=new Test3();
+		obj.start();
+		sai.readLine();
+		usingLamda();
+
+
+		System.out.println("gcfcdlqbihdyv qyuhbd jk	vdtygw ");
+	}	
+}
+
+
+class MultiThreading{
+	void readLine() throws Exception{
+		for(int i=0;i<10;i++) {
+			Thread.sleep(1000);
+			System.out.println("Beep#"+i);
+		}
+	}
+} 
+ 34  ToStringExample.java 
+@@ -0,0 +1,34 @@
+package lab;
+
+public class ToStringExample {
+
+	public static void main(String[] args) {
+
+		Student1 sai=new Student1(123,"sairaj");
+		System.out.println(sai);
+	}
+}
+
+
+// when we try to print an object jvm will call toString() method implicitly which is present in Object Class.
+//Syntax of tOString method
+/*public String toString() {
+	returns getClass().getName() + "@" +Integer.toHexString(hashCode());
+}*/
+
+class Student1 extends Object{
+	int rollNo;
+	String name;
+	Student1(int rollNo,String name){
+		this.name=name;
+		this.rollNo=rollNo;
+	}
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return this.rollNo;
+	}
+	/*public String toString() {
+		return "id of the Student is "+this.rollNo+ " and name is "+this.name; 
+	}*/
+} 
+ 111  Transport.java 
+@@ -0,0 +1,111 @@
+package lab;
+
+public class Transport {
+	public static void main(String args[])
+	{
+		Ford ford=new Ford();
+		ford.carData(2300000, 5, 4, "petrol");
+		System.out.println("Displaying details of Ford");
+		ford.displayFord();
+		System.out.println("**************************");
+		Audi audi=new Audi();
+		audi.carData(6000000, 9, 2, "diesel");
+		System.out.println("Displaying details of Audi");
+		audi.displayAudi();
+		System.out.println("**************************");
+		Bajaj bajaj=new Bajaj();
+		bajaj.bikeData(5, 2, 5, "air", "alloys");
+		System.out.println("Displaying details of Bajaj");
+		bajaj.displayBajaj();
+		System.out.println("**************************");
+		TVS tvs=new TVS();
+		tvs.bikeData(5, 2, 5, "oil", "spokes");
+		System.out.println("Displaying details of TVS");
+		tvs.displayTVS();
+	}
+}
+
+
+class Vehicles{
+	int mileage;
+	int price;
+}
+
+class Car extends Vehicles{
+	int ownership_cost;
+	int warranty;
+	int seat;
+	String fule;
+	void carData(int ownership_cost,int warranty,int seat,String fule) {
+		this.ownership_cost=ownership_cost;
+		this.fule=fule;
+		this.seat=seat;
+		this.warranty=warranty;
+	}
+}
+
+class Bike extends Vehicles{
+	int gears;
+	int cylinders;
+	String cooling;
+	String wheel_type;
+	int  fuel_tank_size;
+	void bikeData(int gears,int cylinders,int fuel_tank_size,String cooling,String wheel_type) {
+		this.gears=gears;
+	    this.cylinders=cylinders;
+		this.cooling=cooling;
+		this.wheel_type=wheel_type;
+		this.fuel_tank_size=fuel_tank_size;
+	}
+}
+
+class Ford extends Car{
+	void displayFord() {
+		System.out.println("ownership_cost :"+ownership_cost);
+		System.out.println("warranty :"+warranty);
+		System.out.println("seat :"+seat);
+		System.out.println("fule :"+fule);
+	}
+}
+
+class Audi extends Car{
+	void displayAudi() {
+		System.out.println("ownership_cost :"+ownership_cost);
+		System.out.println("warranty :"+warranty);
+		System.out.println("seat :"+seat);
+		System.out.println("fule :"+fule);
+	}
+}
+
+class Bajaj extends Bike{
+	void displayBajaj() {
+		System.out.println("gears :"+gears);
+		System.out.println("cylinders :"+cylinders);
+		System.out.println("cooling :"+cooling);
+		System.out.println("wheel_type :"+wheel_type);
+		System.out.println("fuel_tank_size :"+fuel_tank_size);
+	}
+}
+
+class TVS extends Bike{
+	void displayTVS() {
+		System.out.println("gears :"+gears);
+		System.out.println("cylinders :"+cylinders);
+		System.out.println("cooling :"+cooling);
+		System.out.println("wheel_type :"+wheel_type);
+		System.out.println("fuel_tank_size :"+fuel_tank_size);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 34  UserDefinedArrayList.java 
+@@ -0,0 +1,34 @@
+package lab;
+
+import java.util.*;
+
+public class UserDefinedArrayList {
+	public static void main(String[] args) {
+		List<Student> arr=new ArrayList<Student>();
+		arr.add(new Student(111,"sairaj"));
+		arr.add(new Student(222,"viraj"));
+		arr.add(new Student(333,"sushant"));
+		arr.add(new Student(444,"tejas"));
+		arr.forEach(sai ->{
+			System.out.println("name ="+sai.name+", id="+sai.id);
+		});
+		for(Student sai:arr) {
+			if(sai.id==MyConsole.getInteger("Enter the Student id to get name of the student")) {
+				System.out.println("the name of the student is :"+sai.name);
+			}
+			else {
+				System.out.println("Student not found");
+			}
+		}
+	}
+}
+
+class Student{
+	int id;
+	String name;
+	Student(){}
+	Student(int id,String name){
+		this.name=name;
+		this.id=id;
+	}
+}
+ 41  UserDefinedHashSet.java 
+@@ -0,0 +1,41 @@
+package lab;
+import java.util.*;
+public class UserDefinedHashSet {
+
+	public static void main(String[] args) {
+		int num=MyConsole.getInteger("enter no of employee you want to add");
+		Set<Employees> arr=new HashSet<Employees>();
+		while(num!=0) {
+
+			int id=MyConsole.getInteger("enter id");
+			MyConsole.getString("");
+			String name=MyConsole.getString("enter name");
+			arr.add(new Employees(id,name));
+			num--;
+		}
+		arr.forEach(sai ->{
+			System.out.println("id="+sai.id+", name="+sai.name );
+		});
+	}
+}
+
+class Employees{
+	int id;
+	String name;
+	Employees(){}
+	Employees(int id,String name){
+		this.name=name;
+		this.id=id;
+	}
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return Integer.hashCode(id);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		Employees temp=(Employees)obj; 
+		return temp.id==id;
+	}
+
+} 
+ 39  UserNamePassword.java 
+@@ -0,0 +1,39 @@
+package lab;
+
+import java.io.*;
+/*Create an App that takes inputs from the User that generates Username and Password
+* It should have Functions: SignIn(Login) and SignUp(Register).
+* It should also allow user to signoff(remove) at any point of time.*/
+import java.util.*;
+
+public class UserNamePassword {
+	static Map<String, String> use = new HashMap<String, String>();
+	public static void main(String[] args) {
+		int count=0;
+		do {
+			switch(MyConsole.getString("Press 1 for signup or press 2 for login")){
+		case "1":
+			String a=MyConsole.getString("enter username");
+			String b=MyConsole.getString("enter password");
+			use.put(a,b);
+			break;
+		case "2":
+			String c=MyConsole.getString("enter username");
+			String d=MyConsole.getString("enter password");
+			//use.put(c, d);
+			for(Map.Entry m : use.entrySet()){    
+			    if(m.getKey()==c && m.getValue()==d) {
+			    	System.out.println("you loged in");
+			    } 
+			    else {
+			    	System.out.println("retry again");
+			    }
+			  }
+			count=1;
+					break;
+		default:
+				break;
+	}
+			}while(count==0);
+}
+}
+ 18  array.java 
+@@ -0,0 +1,18 @@
+import java.util.Scanner;
+class array
+{
+public static void main(String args[])
+{
+	Scanner sc=new Scanner(System.in);
+	int arr[];
+	arr=new int[5];
+	for(int i=0;i<=4;i++)
+	{
+	arr[i]=sc.nextInt();
+	}
+	for(int i=0;i<=4;i++)
+	{
+	System.out.print(arr[i]+" ");
+	}
+}
+}
